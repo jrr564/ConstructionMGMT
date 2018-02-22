@@ -4,6 +4,8 @@ var app            = express()
 var morgan         = require('morgan')
 var bodyParser     = require('body-parser')
 var methodOverride = require('method-override')
+var cookieParser = require('cookie-parser')
+var session      = require('express-session');
 
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -27,7 +29,14 @@ app.use(cookieParser())
 app.use(bodyParser())
 // get information from html forms
 
+// required for passport
+app.use(session({ secret: 'constructionmgmt' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
+// routes ======================================================================
+require('./routes/html-routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 //View Engine
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
