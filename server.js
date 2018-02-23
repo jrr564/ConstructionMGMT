@@ -42,6 +42,7 @@ require('./routes/html-routes.js')(app, passport); // load our routes and pass i
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+require('./config/passport')(passport); // pass passport for configuration
 
 app.listen(port)
 console.log('The magic happens on port ' + port)

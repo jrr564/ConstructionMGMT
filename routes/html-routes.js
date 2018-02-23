@@ -3,10 +3,24 @@ module.exports = function(app, passport) {
     res.render('login', { message: req.flash('loginMessage') });
   });
 
+  // process the login form
+  app.post('/', passport.authenticate('local-login', {
+      successRedirect : '/home', // redirect to the secure profile section
+      failureRedirect : '/', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+  }));
+
+
   app.get('/signup', function(req, res) {
     // render the page and pass in any flash data if it exists
     res.render('signup', { message: req.flash('signupMessage') });
   });
+
+  app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/home', // redirect to the secure profile section
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
   app.get('/home', isLoggedIn, function(req, res) {
     res.render('index', {
@@ -14,13 +28,11 @@ module.exports = function(app, passport) {
     });
   });
 
-    // =====================================
-    // LOGOUT ==============================
-    // =====================================
-    app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
-    });
+  // LOGOUT ==============================
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
 };
 
 // route middleware to make sure a user is logged in
