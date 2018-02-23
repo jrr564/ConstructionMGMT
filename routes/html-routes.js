@@ -4,11 +4,16 @@ module.exports = function(app, passport) {
   });
 
   // process the login form
-  app.post('/', passport.authenticate('local-login', {
+  app.post('/', function(req, res) {
+    console.log(req.body)
+
+    passport.authenticate('local-login', {
       successRedirect : '/home', // redirect to the secure profile section
       failureRedirect : '/', // redirect back to the signup page if there is an error
       failureFlash : true // allow flash messages
-  }));
+    })
+    res.status(200).end();
+  });
 
 
   app.get('/signup', function(req, res) {
@@ -16,11 +21,16 @@ module.exports = function(app, passport) {
     res.render('signup', { message: req.flash('signupMessage') });
   });
 
-  app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/home', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+  app.post('/signup', function(req, res) {
+    console.log(req.body)
+
+    passport.authenticate('local-signup', {
+      successRedirect : '/home', // redirect to the secure profile section
+      failureRedirect : '/signup', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+    })
+    res.status(200).end();
+  });
 
   app.get('/home', isLoggedIn, function(req, res) {
     res.render('index', {
