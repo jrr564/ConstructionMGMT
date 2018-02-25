@@ -5,7 +5,7 @@
       <h1><i class="fas fa-sign-in-alt"></i> Signup</h1>
 
       <!-- show any messages that come back with authentication-->
-      {{#if message.length > 0 }}
+      {{#if message.length }}
           <div class="alert alert-danger">{{ message }}</div>
       {{/if}}
 
@@ -33,7 +33,7 @@
 
       <hr>
 
-      <p>Already have an account? <a href="/login">Login</a></p>
+      <p>Already have an account? <a href="/">Login</a></p>
 
   </div>
 
