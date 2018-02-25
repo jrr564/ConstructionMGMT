@@ -1,14 +1,14 @@
 var db = require('../models')
 
 module.exports = function (app, passport) {
-  app.get('/', function (req, res) {
+  app.get('/login', function (req, res) {
     res.render('login', { message: req.flash('loginMessage') })
   })
 
   // process the login form
-  app.post('/', passport.authenticate('local-login', {
-      successRedirect: '/home', // redirect to the secure profile section
-      failureRedirect: '/', // redirect back to the login page if there is an error
+  app.post('/login', passport.authenticate('local-login', {
+      successRedirect: '/', // redirect to the secure profile section
+      failureRedirect: '/login', // redirect back to the login page if there is an error
       failureFlash: true // allow flash messages
     }), function(req, res) {
       res.status(200).end()
@@ -20,7 +20,7 @@ module.exports = function (app, passport) {
   })
 
   app.post('/signup', passport.authenticate('local-signup', {
-      successRedirect: '/home', // redirect to the login section
+      successRedirect: '/', // redirect to the login section
       failureRedirect: '/signup', // redirect back to the signup page if there is an error
       failureFlash: true // allow flash messages
     }),
@@ -28,7 +28,7 @@ module.exports = function (app, passport) {
       res.status(200).end()
     })
 
-  app.get('/home', isLoggedIn, function (req, res) {
+  app.get('/', isLoggedIn, function (req, res) {
     res.render('index', {
       user: req.user // get the user out of session and pass to template
     })
@@ -36,7 +36,7 @@ module.exports = function (app, passport) {
 
   app.get('/logout', function (req, res) {
     req.logout()
-    res.redirect('/')
+    res.redirect('/login')
   })
 }
 
@@ -48,5 +48,5 @@ function isLoggedIn (req, res, next) {
     return next()
 
   // if they aren't redirect them to the login page
-  res.redirect('/')
+  res.redirect('/login')
 }
