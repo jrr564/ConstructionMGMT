@@ -1,28 +1,22 @@
-const bcrypt = require('bcrypt')
-
 module.exports = function (sequelize, DataTypes) {
-  const User = sequelize.define('users', {
+  const Users = sequelize.define('Users', {
     username: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     role: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     }
   })
 
-  User.prototype.generateHash = function (password) {
-    return bcrypt.hash(password, bcrypt.genSaltSync(8))
-  }
-
-  User.prototype.validPassword = function (password) {
-    return bcrypt.compare(password, this.password)
-  }
-
-  return User
+  return Users
 }

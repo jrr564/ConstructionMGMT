@@ -1,6 +1,8 @@
 var express = require('express')
 var app = express()
 
+var db = require('./models')
+
 var morgan = require('morgan')
 var bodyParser = require('body-parser')
 var methodOverride = require('method-override')
@@ -47,5 +49,9 @@ app.set('view engine', 'handlebars')
 
 require('./config/passport')(passport) // pass passport for configuration
 
-app.listen(port)
-console.log('The magic happens on port ' + port)
+db.sequelize.sync()
+  .then(function () {
+    app.listen(port, function () {
+      console.log('App listening on PORT ' + port)
+    })
+  })
