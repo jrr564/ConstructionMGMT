@@ -1,9 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Projects = sequelize.define("Projects", {
-        // project_id: {
-        //     type: DataTypes.INTEGER,
-        //     primarykey: true
-        // },
+
         project_name: {
             type: DataTypes.STRING,
             allowNull: false

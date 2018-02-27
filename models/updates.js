@@ -1,9 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Updates = sequelize.define("Updates", {
-        // revision_id: {
-        //     type: DataTypes.INTEGER,
-        //     primarykey: true
-        // },
+
         user: {
             type: DataTypes.STRING
         }, 

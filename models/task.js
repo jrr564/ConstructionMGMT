@@ -1,12 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Tasks = sequelize.define("Tasks", {
 
-        // task_id: {
-        //     type: DataTypes.INTEGER,
-        //     primarykey: true,
-        //     allowNull: false
-        // },
-
         task_description: { 
             type: DataTypes.TEXT,
             allowNull: false,
@@ -54,12 +48,12 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Tasks.associate = function(models) {
-        //Associating a Task to a User.  A Task can't be created without a User due to the foreign key constraint
-        // Tasks.belongsTo(models.User, {
-        //     foreignKey: {
-        //         allowNull: false
-        //     }
-        // });
+        // Associating a Task to a User.  A Task can't be created without a User due to the foreign key constraint
+        Tasks.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
     }
 
     return Tasks;
