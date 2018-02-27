@@ -1,7 +1,7 @@
 /* Show it is fixed to the top */
 
 body {
-    background-image: url(assets/images/construction5.jpg);
+    background-image: url(file:///Users/vitamind/Desktop/Bootcamp/Project%202/ConstructionMGMT/public/assets/images/construction5.jpg);
     min-height: 25rem;
     padding-top: 1rem;
 }
