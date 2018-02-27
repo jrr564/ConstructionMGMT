@@ -15,5 +15,14 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
+    Updates.associate = function(models) {
+
+        Updates.hasMany(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    }
+
     return Updates;
 }
