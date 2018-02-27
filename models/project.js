@@ -1,16 +1,15 @@
 module.exports = function(sequelize, DataTypes) {
-    var Projects = sequelize.define("Projects" {
-        project_id: {
-            type: DataTypes.INTEGER,
-            primarykey: true
-        },
+    var Projects = sequelize.define("Projects", {
+        // project_id: {
+        //     type: DataTypes.INTEGER,
+        //     primarykey: true
+        // },
         project_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
         created_date: {
-            type: 'TIMESTAMP',
-            defaultValue: Sequlize.literal('CURRENT_TIMESTAMP'),
+            type: DataTypes.DATE,
             allowNull: false
         },
         completed_date: {
@@ -20,6 +19,8 @@ module.exports = function(sequelize, DataTypes) {
 
     Projects.associate = function(models) {
         //Associating a Project to a User. 
+
+        //has many tasks
         Projects.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false

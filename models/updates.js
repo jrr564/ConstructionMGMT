@@ -1,9 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
     var Updates = sequelize.define("Updates", {
-        revision_id: {
-            type: DataTypes.INTEGER,
-            primarykey: true
-        },
+        // revision_id: {
+        //     type: DataTypes.INTEGER,
+        //     primarykey: true
+        // },
+        user: {
+            type: DataTypes.STRING
+        }, 
         comment: {
             type: DataTypes.STRING
         },
@@ -11,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING
         },
         attachment: {
-            ///////////
+            type: DataTypes.STRING
         }
     });
 

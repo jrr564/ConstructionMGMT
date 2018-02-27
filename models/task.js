@@ -1,11 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
     var Tasks = sequelize.define("Tasks", {
 
-        task_id: {
-            type: DataTypes.INTEGER,
-            primarykey: true,
-            allowNull: false
-        },
+        // task_id: {
+        //     type: DataTypes.INTEGER,
+        //     primarykey: true,
+        //     allowNull: false
+        // },
 
         task_description: { 
             type: DataTypes.TEXT,
@@ -20,14 +20,22 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: "Open"
         },
 
+        created_by: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
         issued: {
             type: DataTypes.STRING,
             allowNull: false
         },
 
+        project: {
+            type: DataTypes.STRING
+        },
+
         created_date: {
-            type: 'TIMESTAMP',
-            defaultValue: Sequlize.literal('CURRENT_TIMESTAMP'),
+            type: DataTypes.DATE,
             allowNull: false
         },
 
@@ -40,17 +48,18 @@ module.exports = function(sequelize, DataTypes) {
         },
 
         attachment: {
-            ///////
+            type: DataTypes.STRING
         }
+
     });
 
     Tasks.associate = function(models) {
         //Associating a Task to a User.  A Task can't be created without a User due to the foreign key constraint
-        Tasks.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
+        // Tasks.belongsTo(models.User, {
+        //     foreignKey: {
+        //         allowNull: false
+        //     }
+        // });
     }
 
     return Tasks;
