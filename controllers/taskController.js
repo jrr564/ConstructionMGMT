@@ -2,7 +2,7 @@ var tasks = require('../models').Tasks
 
 module.exports = {
   allTasks: function (req, res) {
-    db.Posts.findAll({
+    tasks.findAll({
       where: {
         userID: 11
       },
@@ -19,7 +19,7 @@ module.exports = {
   },
   addTask: function (req, res) {
     console.log(req.body)
-    db.Posts.create(req.body).then(() => {
+    tasks.create(req.body).then(() => {
       res.status(200).send('Post added')
     }).catch(error => {
       console.log(error)
@@ -27,7 +27,7 @@ module.exports = {
   },
   updateTask: function (req, res) {
     console.log(req.params)
-    db.Posts.update({
+    tasks.update({
       isDeleted: true
     },
       {
