@@ -1,4 +1,4 @@
-var tasks = require('../models').task
+var tasks = require('../models').Tasks
 
 module.exports = {
   allTasks: function (req, res) {

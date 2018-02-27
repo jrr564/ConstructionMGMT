@@ -11,6 +11,9 @@ router.route('/api/tasks')
   .post(taskControl.addTask)
   .put(taskControl.updateTask)
 
+//router.route('/api/tasks/:status')
+
+/*
 router.route('/api/projects')
   .get(projectControl.allProjects)
   .post(projectControl.addProject)
@@ -18,6 +21,7 @@ router.route('/api/projects')
 router.route('/api/updates')
   .get(updateControl.allUpdates)
   .post(updateControl.addUpdate)
+*/
 
 router.route('/api/users')
   .get(userControl.allUsers)
