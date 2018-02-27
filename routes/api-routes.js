@@ -11,7 +11,15 @@ router.route('/api/tasks')
   .post(taskControl.addTask)
   .put(taskControl.updateTask)
 
-// router.route('/api/tasks/:status')
+router.route('/api/tasks/users/:userId/projects/:projectId/status/:status')
+  .get(taskControl.filterTasks)
+
+/*data: [
+    {
+        value: number,
+        name: string
+    }
+]*/
 
 /*
 router.route('/api/projects')
@@ -27,4 +35,3 @@ router.route('/api/users')
   .get(userControl.allUsers)
 
 module.exports = router
-

@@ -1,6 +1,12 @@
 <div class="container">
     <h2>Dashboard</h2>
+    <h5>Hello <strong id="username" style="color: red">{{ user.username }}</strong>!</h5>
     <h5>you are logged in.</h5>
     <h5><a href="/logout">logout</a></h5>
 </div>
+
+<script>
+    var id = $("#username").text()
+    console.log(id)
+</script>
 

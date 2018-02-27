@@ -3,10 +3,25 @@ var tasks = require('../models').Tasks
 module.exports = {
   allTasks: function (req, res) {
     tasks.findAll({
+      order: [['created_date', 'DESC']]
+    }).then(data => {
+      if (data.length === 0) {
+        res.status(404).send('No data found')
+      } else {
+        res.status(200).json(data)
+      }
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+  filterTasks: function (req, res) {
+    tasks.findAll({
       where: {
-        userID: 11
+        UserId: req.params.userId,
+        status: req.params.status,
+        project
       },
-      order: [['id', 'DESC']]
+      order: [['created_date', 'DESC']]
     }).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
