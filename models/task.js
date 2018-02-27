@@ -10,28 +10,32 @@ module.exports = function(sequelize, DataTypes) {
         },
 
         status: {
-            type: DataTypes.STRING,
+            type: DataTypes.ENUM,
+            values: ["Open", "Closed", "Ready to Inspect", "Not Approved"],
             defaultValue: "Open"
         },
 
-        created_by: {
+        created_by_user_id: {
             type: DataTypes.STRING,
             allowNull: false
         },
 
-        issued: {
+        assigned_to_user_id: {
             type: DataTypes.STRING,
             allowNull: false
         },
 
-        project: {
+        project_id: {
             type: DataTypes.STRING
         },
 
         created_date: {
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
             allowNull: false
         },
+        // createdAt: Sequelize.DATE,
+        // updatedAt: Sequelize.DATE,
 
         due_date: {
             type: DataTypes.DATE
@@ -54,7 +58,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false
             }
         });
-        Tasks.belongsTo(models.Project, {
+        Tasks.belongsTo(models.Projects, {
             foreignKey: {
                 allowNull: false
             }
