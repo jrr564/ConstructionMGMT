@@ -17,7 +17,6 @@ module.exports = function(sequelize, DataTypes) {
     Projects.associate = function(models) {
         //Associating a Project to a User. 
 
-        //has many tasks
         Projects.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
