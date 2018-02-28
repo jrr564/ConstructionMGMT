@@ -13,7 +13,7 @@ module.exports = {
     })
   },
 
-  allProject: function (req, res) {
+  allProjects: function (req, res) {
     project.findAll().then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
