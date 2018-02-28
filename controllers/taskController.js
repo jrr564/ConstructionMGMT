@@ -17,7 +17,10 @@ module.exports = {
   loadNotification: function (req, res) {
     tasks.findAndCountAll({
       where: {
-        issued: req.body.id
+        issued: req.body.id,
+        status: {
+          [Op.ne]: "completed"
+        }
       },
       order: [['created_date', 'DESC']]
     }).then(data => {
