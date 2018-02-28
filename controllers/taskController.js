@@ -1,10 +1,9 @@
 var tasks = require('../models').Tasks
+var Op = require('Sequelize').Op;
 
 module.exports = {
-  allTasks: function (req, res) {
-    tasks.findAll({
-      order: [['created_date', 'DESC']]
-    }).then(data => {
+  findTaskById: function (req, res) {
+    tasks.findById(req.body.id).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
       } else {
@@ -14,13 +13,22 @@ module.exports = {
       console.log(error)
     })
   },
+
   filterTasks: function (req, res) {
-    tasks.findAll({
+    tasks.findAndCountAll({
       where: {
-        UserId: req.params.userId,
-        status: req.params.status,
-        project
+        UserId: {
+          [Op.like]: req.params.userId
+        },
+        status: {
+          [Op.like]: req.params.status
+        },
+        project: {
+          [Op.like]: req.params.projectId
+        }
       },
+      offset: req.params.page,
+      limit: 10,
       order: [['created_date', 'DESC']]
     }).then(data => {
       if (data.length === 0) {
@@ -32,6 +40,7 @@ module.exports = {
       console.log(error)
     })
   },
+
   addTask: function (req, res) {
     console.log(req.body)
     tasks.create(req.body).then(() => {
@@ -40,11 +49,10 @@ module.exports = {
       console.log(error)
     })
   },
+
   updateTask: function (req, res) {
     console.log(req.params)
-    tasks.update({
-      isDeleted: true
-    },
+    tasks.update(req.body,
       {
         where: {
           id: req.params.id

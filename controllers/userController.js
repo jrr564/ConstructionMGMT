@@ -1,12 +1,15 @@
 var user = require('../models').User
-var Op = require('Sequelize').Op;
 
 module.exports = {
-  allUsers: function (req, res) {
-    user.findAll().then(data => {
-      res.status(200).json(data)
-    }).catch(error => {
-      console.log(error)
+  loadAllUsers: function() {
+    return new Promise((resolve, reject) => {
+      user.findAll({
+        attributes: ['username', 'id']
+      }).then(data => {
+        resolve(data)
+      }).catch(error => {
+        reject(error)
+      })
     })
   }
 }
