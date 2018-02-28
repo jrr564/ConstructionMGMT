@@ -10,7 +10,7 @@ router.route('/api/tasks')
   .post(taskControl.addTask)
   .put(taskControl.updateTask)
 
-router.route('/api/tasks/users/:userId/projects/:projectId/status/:status')
+router.route('/api/tasks/users/:userId/projects/:projectId/status/:status/page/:page')
   .get(taskControl.filterTasks)
 
 /*data: [
