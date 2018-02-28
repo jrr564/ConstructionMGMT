@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Projects.associate = function(models) {
-        //Associating a Project to a User. 
+        //Associating a Project to a User.
 
         //has many tasks
         Projects.belongsTo(models.User, {
@@ -23,3 +23,6 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false
             }
         });
+      }
+      return Projects
+    }

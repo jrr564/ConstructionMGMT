@@ -7,11 +7,10 @@ var userControl = require('../controllers/userController')
 var router = express.Router()
 
 router.route('/api/tasks')
-  .get(taskControl.allTasks)
   .post(taskControl.addTask)
   .put(taskControl.updateTask)
 
-router.route('/api/tasks/users/:userId/projects/:projectId/status/:status')
+router.route('/api/tasks/users/:userId/projects/:projectId/status/:status/page/:page')
   .get(taskControl.filterTasks)
 
 /*data: [
@@ -30,8 +29,5 @@ router.route('/api/updates')
   .get(updateControl.allUpdates)
   .post(updateControl.addUpdate)
 */
-
-router.route('/api/users')
-  .get(userControl.allUsers)
 
 module.exports = router
