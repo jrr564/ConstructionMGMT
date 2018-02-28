@@ -1,4 +1,7 @@
 var db = require('../models')
+var taskControl = require('../controllers/taskController')
+var projectControl = require('../controllers/projectController')
+var userControl = require('../controllers/userController')
 
 module.exports = function (app, passport) {
   app.get('/login', function (req, res) {
@@ -24,13 +27,26 @@ module.exports = function (app, passport) {
       failureRedirect: '/signup', // redirect back to the signup page if there is an error
       failureFlash: true // allow flash messages
     }),
-    function (req, res) {      
+    function (req, res) {
       res.status(200).end()
     })
 
   app.get('/', isLoggedIn, function (req, res) {
-    res.render('index', {
-      user: req.user // get the user out of session and pass to template
+    Promise.all([
+      userControl.loadAllUsers(),
+      projectControl.loadAllProjects(),
+      taskControl.loadTasksCount(req.user.id)
+    ])
+    .then( ([result1, result2, result3]) => {
+      res.render('index', {
+        user: req.user, // get the user out of session and pass to template
+        allUsers: result1,
+        allProjects: result2,
+        myTasks: result3
+      })
+    })
+    .catch(error => {
+      console.log(error)
     })
   })
 
