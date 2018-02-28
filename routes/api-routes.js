@@ -2,7 +2,6 @@ var express = require('express')
 var taskControl = require('../controllers/taskController')
 var projectControl = require('../controllers/projectController')
 var updateControl = require('../controllers/updateController')
-var userControl = require('../controllers/userController')
 
 var router = express.Router()
 
@@ -13,14 +12,24 @@ router.route('/api/tasks')
 router.route('/api/tasks/users/:userId/projects/:projectId/status/:status/page/:page')
   .get(taskControl.filterTasks)
 
-/*data: [
-    {
-        value: number,
-        name: string
-    }
-]*/
+//API for user inbox
+router.route('/api/inbox')
+  .get(taskControl.getInbox)
 
-/*
+//API for dashboard
+router.route('/api/dashbord/getCountByProject')
+  .get(taskControl.getCountByProject)
+
+router.route('/api/dashbord/getCountByStatus')
+  .get(taskControl.getCountByStatus)
+
+router.route('/api/dashbord/getCountByCreator')
+  .get(taskControl.getCountByCreator)
+
+router.route('/api/dashbord/getTop5DueTasks')
+  .get(taskControl.getTop5DueTasks)
+
+
 router.route('/api/projects')
   .get(projectControl.allProjects)
   .post(projectControl.addProject)
@@ -28,6 +37,6 @@ router.route('/api/projects')
 router.route('/api/updates')
   .get(updateControl.allUpdates)
   .post(updateControl.addUpdate)
-*/
+
 
 module.exports = router
