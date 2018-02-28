@@ -7,7 +7,6 @@ var userControl = require('../controllers/userController')
 var router = express.Router()
 
 router.route('/api/tasks')
-  .get(taskControl.allTasks)
   .post(taskControl.addTask)
   .put(taskControl.updateTask)
 
@@ -30,8 +29,5 @@ router.route('/api/updates')
   .get(updateControl.allUpdates)
   .post(updateControl.addUpdate)
 */
-
-router.route('/api/users')
-  .get(userControl.allUsers)
 
 module.exports = router

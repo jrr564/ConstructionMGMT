@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Tasks = sequelize.define("Tasks", {
 
-        task_description: { 
+        task_description: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
@@ -54,3 +54,6 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false
             }
         });
+      }
+      return Tasks
+    }
