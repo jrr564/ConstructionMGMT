@@ -36,17 +36,17 @@ module.exports = {
   filterTasks: function (req, res) {
     tasks.findAndCountAll({
       where: {
-        UserId: {
-          [Op.like]: req.params.userId
+        UserId: req.params.userId || {
+          [Op.ne]: null
         },
-        status: {
-          [Op.like]: req.params.status
+        status: req.params.status || {
+          [Op.ne]: null
         },
-        project: {
-          [Op.like]: req.params.projectId
+        project: req.params.projectId || {
+          [Op.ne]: null
         }
       },
-      offset: req.params.page,
+      offset: (req.params.page - 1) * 10,
       limit: 10,
       order: [['created_date', 'DESC']]
     }).then(data => {
