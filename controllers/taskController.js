@@ -14,6 +14,25 @@ module.exports = {
     })
   },
 
+  loadNotification: function (req, res) {
+    tasks.findAndCountAll({
+      where: {
+        issued: req.body.id
+      },
+      order: [['created_date', 'DESC']]
+    }).then(data => {
+      if (data.length === 0) {
+        res.status(404).send('No data found')
+      } else {
+        console.log(data.count)
+        console.log(data.rows)
+        res.status(200).json(data)
+      }
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+
   filterTasks: function (req, res) {
     tasks.findAndCountAll({
       where: {
@@ -44,7 +63,7 @@ module.exports = {
   addTask: function (req, res) {
     console.log(req.body)
     tasks.create(req.body).then(() => {
-      res.status(200).send('Post added')
+      res.status(200).send('task added')
     }).catch(error => {
       console.log(error)
     })
@@ -61,7 +80,7 @@ module.exports = {
       if (data[0] === 0) {
         res.status(404).send('No affected data')
       } else {
-        res.status(200).send('Post updated')
+        res.status(200).send('task updated')
       }
     }).catch(error => {
       console.log(error)

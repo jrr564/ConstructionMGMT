@@ -2,7 +2,6 @@ var express = require('express')
 var taskControl = require('../controllers/taskController')
 var projectControl = require('../controllers/projectController')
 var updateControl = require('../controllers/updateController')
-var userControl = require('../controllers/userController')
 
 var router = express.Router()
 
@@ -20,7 +19,6 @@ router.route('/api/tasks/users/:userId/projects/:projectId/status/:status/page/:
     }
 ]*/
 
-/*
 router.route('/api/projects')
   .get(projectControl.allProjects)
   .post(projectControl.addProject)
@@ -28,6 +26,6 @@ router.route('/api/projects')
 router.route('/api/updates')
   .get(updateControl.allUpdates)
   .post(updateControl.addUpdate)
-*/
+
 
 module.exports = router
