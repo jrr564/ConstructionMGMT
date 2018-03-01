@@ -13,20 +13,20 @@ router.route('/api/tasks/users/:userId/projects/:projectId/status/:status/page/:
   .get(taskControl.filterTasks)
 
 //API for user inbox
-router.route('/api/inbox')
+router.route('/api/inbox/:id')
   .get(taskControl.getInbox)
 
 //API for dashboard
-router.route('/api/dashbord/getCountByProject')
+router.route('/api/dashboard/getCountByProject')
   .get(taskControl.getCountByProject)
 
-router.route('/api/dashbord/getCountByStatus')
+router.route('/api/dashboard/getCountByStatus')
   .get(taskControl.getCountByStatus)
 
-router.route('/api/dashbord/getCountByCreator')
+router.route('/api/dashboard/getCountByCreator')
   .get(taskControl.getCountByCreator)
 
-router.route('/api/dashbord/getTop5DueTasks')
+router.route('/api/dashboard/getTop5DueTasks')
   .get(taskControl.getTop5DueTasks)
 
 
