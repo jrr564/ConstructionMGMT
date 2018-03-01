@@ -31,6 +31,7 @@ module.exports = function (app, passport) {
       res.status(200).end()
     })
 
+  // html for dashboard page, main page after login
   app.get('/', isLoggedIn, function (req, res) {
     Promise.all([
       userControl.loadAllUsers(),
@@ -52,6 +53,7 @@ module.exports = function (app, passport) {
       })
   })
 
+  // html for task list page
   app.get('/list', isLoggedIn, function (req, res) {
     Promise.all([
       userControl.loadAllUsers(),
