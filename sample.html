@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Construction MGMT</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Heebo:700|Lato" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/css/style.css" type="text/css"/>
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <script src="public/assets/js/app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <head>
+        <meta charset="UTF-8">
+        <title>Construction MGMT</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Heebo|Lato" rel="stylesheet">
     
-	</head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="public/assets/css/style.css" type="text/css"/>
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <script src="public/assets/js/app.js"></script>
+    </head>
 	<body>
+        
+        <!-- HEADER NAVBAR -->
+
         <nav class="navbar navbar-default navbar-top navbar-fixed-top navbar-expand-lg">
             <div class="navbar-collapse" id="navbarSupportedContent">
                 <a id= "logo-text" class="navbar-brand disabled" href="#">
@@ -19,6 +24,9 @@
                     CONSTRUCTION MGMT
                 </a>       
               <ul class="navbar-nav ml-auto top-link">
+                <li class="nav-item">
+                    <span id="navbar-user-name" class="navbar-text">USER NAME</span>
+                </li>
                 <li class="nav-item">
                     <a class="header-link nav-link" href="#">
                             <i class="fa fa-inbox" aria-hidden="true"></i> INBOX
@@ -29,8 +37,11 @@
                 </li>
               </ul>
             </div>
-        </nav> 
+        </nav>
         <div id="wrapper">
+
+            <!-- SIDEBAR -->
+
                 <div id="sidebar-wrapper">
                     <ul class="sidebar-nav navbar-light">
                         <div class="card">
@@ -47,9 +58,11 @@
                                             ALL ISSUES
                                             <span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <!-- handlebars -->
-                                        </ul>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Issue 1</a>
+                                          <a class="dropdown-item" href="#">Issue 2</a>
+                                          <a class="dropdown-item" href="#">Issue 3</a>
+                                        </div>
                                     </div>
                                     <li class="nav-item">
                                         <a class="header-link nav-link disabled" href="#">FILTER</a>
@@ -70,13 +83,20 @@
                       </div>
                     </ul>
                 </div>
+
+                <!-- WHERE THE CONTENT GOES -->
+
                 <div id="page-content-wrapper">
                     <div class="page-content">
+                        
+                        <!-- sample table -->
+                        
                         <div class="table-panel table-inverse">
                             <table class="table table-bordered table-inverse">
                                <thead class="thead-inverse">
                                   <tr>
-                                    <th>ID</th>
+                                    <th>ID
+                                    </th>
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Assigned To</th>
@@ -90,7 +110,9 @@
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <th scope="row">#333</th>
+                                    <th scope="row">#333
+                                        <button type="submit" data-toggle="modal" data-target="#editModal" class="btn btn-warning btn-sm edit-button">Edit</button>
+                                    </th>
                                     <td>Broken Gasket</td>
                                     <td>Open</td>
                                     <td>Allan Construction Co.</td>
@@ -102,7 +124,9 @@
                                     <td>dummy@dummy.com</td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">#962</th>
+                                    <th scope="row">#962
+                                            <button type="submit" data-toggle="modal" data-target="#editModal" class="btn btn-warning btn-sm edit-button">Edit</button>
+                                    </th>
                                     <td>Patch Ceiling</td>
                                     <td>Closed</td>
                                     <td>Allan</td>
@@ -119,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <!--- modal -->
+            <!--- "add issue" modal -->
             <div id="newIssueModal" class="modal fade">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -133,22 +157,121 @@
                         <form>
                             <div class="form-group modal-form">
                                 <div class="col-md-4">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Project
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Bank Tower</a>
+                                          <a class="dropdown-item" href="#">Longhorn Arena</a>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <label for="description-label">Add New Project</label>
+                                        <input type="text">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
                                     <label for="description-label">Description</label>
-                                    <input type="text">
+                                    <textarea type="text"></textarea>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="description-label">Status</label>
-                                    <input type="text">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Status
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Open</a>
+                                          <a class="dropdown-item" href="#">Closed</a>
+                                        </div>
+                                    </div>
                                 </div>                                
                                 <div class="col-md-4">
-                                    <label for="description-label">Assigned To</label>
-                                    <input type="text">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Assigned To
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Chen</a>
+                                          <a class="dropdown-item" href="#">Jon</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="due-date-input" class="col-form-label">Due</label>
+                                    <div class="col-10">
+                                      <input class="form-control" type="date" value="2011-08-19" id="due-date-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlFile1">Add an Attachment</label>
+                                            <input type="file" class="form-control-file" id="formControlFile1">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning">Add Issue</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        <!-- "edit issue" modal -->
+        <div id="editModal" class="modal fade">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">EDIT ISSUE</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group modal-form">
+                                <div class="col-md-4">
+                                    <label for="description-label">Description</label>
+                                    <textarea rows="5" type="text"></textarea>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="description-label">Due Date</label>
-                                    <input type="text">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Status
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Open</a>
+                                          <a class="dropdown-item" href="#">Closed</a>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div class="col-md-4">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Assigned To
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="#">Chen</a>
+                                          <a class="dropdown-item" href="#">Jon</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <br>
+                                <div class="form-group row">
+                                    <label for="due-date-input" class="col-form-label">Due</label>
+                                    <div class="col-10">
+                                      <input class="form-control" type="date" value="2011-08-19" id="due-date-input">
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <form>
                                         <div class="form-group">
@@ -172,11 +295,6 @@
                    
             
     </body>
-    <!-- <script>$(document).ready(function() {
-            $(".dropdown-toggle").dropdown();
-        });
-        $(".navbar-default").sticky({ topSpacing: 0 });
-    </script> -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
