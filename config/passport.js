@@ -37,9 +37,9 @@ module.exports = function (passport) {
         username: username
       }
     }).then(function (user) {
-      // check to see if theres already a user with that email
+      // check to see if theres already a user with that username
       if (user) {
-        return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
+        return done(null, false, req.flash('signupMessage', 'That username is already taken.'))
       } else {
         User.create({
           username: req.body.username,
