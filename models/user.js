@@ -18,15 +18,5 @@ module.exports = function (sequelize, DataTypes) {
     }
   })
 
-  User.associate = function(models) {
-    //Associating a Project to a User. 
-
-    User.hasMany(models.Tasks, {
-        foreignKey: {
-            allowNull: false
-        }
-    });
-  }
-
   return User
 }

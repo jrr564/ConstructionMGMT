@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Updates.associate = function(models) {
 
-        Updates.hasMany(models.User, {
+        Updates.belongsTo(models.Tasks, {
             foreignKey: {
                 allowNull: false
             }
