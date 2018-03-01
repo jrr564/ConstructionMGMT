@@ -10,12 +10,12 @@ module.exports = function (app, passport) {
 
   // process the login form
   app.post('/login', passport.authenticate('local-login', {
-      successRedirect: '/', // redirect to the secure profile section
-      failureRedirect: '/login', // redirect back to the login page if there is an error
-      failureFlash: true // allow flash messages
-    }), function(req, res) {
-      res.status(200).end()
-    })
+    successRedirect: '/', // redirect to the secure profile section
+    failureRedirect: '/login', // redirect back to the login page if there is an error
+    failureFlash: true // allow flash messages
+  }), function (req, res) {
+    res.status(200).end()
+  })
 
   app.get('/signup', function (req, res) {
     // render the page and pass in any flash data if it exists
@@ -23,31 +23,56 @@ module.exports = function (app, passport) {
   })
 
   app.post('/signup', passport.authenticate('local-signup', {
-      successRedirect: '/', // redirect to the login section
-      failureRedirect: '/signup', // redirect back to the signup page if there is an error
-      failureFlash: true // allow flash messages
-    }),
+    successRedirect: '/', // redirect to the login section
+    failureRedirect: '/signup', // redirect back to the signup page if there is an error
+    failureFlash: true // allow flash messages
+  }),
     function (req, res) {
       res.status(200).end()
     })
 
+  // html for dashboard page, main page after login
   app.get('/', isLoggedIn, function (req, res) {
     Promise.all([
       userControl.loadAllUsers(),
       projectControl.loadAllProjects(),
       taskControl.loadTasksCount(req.user.id)
     ])
-    .then( ([result1, result2, result3]) => {
-      res.render('index', {
-        user: req.user, // get the user out of session and pass to template
-        allUsers: result1,
-        allProjects: result2,
-        myTasks: result3
+      .then(([result1, result2, result3]) => {
+        console.log(result2)
+        console.log(result3)
+        res.render('index', {
+          user: req.user, // get the user out of session and pass to template
+          allUsers: result1,
+          allProjects: result2,
+          myTaskCount: result3
+        })
       })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .catch(error => {
+        console.log(error)
+      })
+  })
+
+  // html for task list page
+  app.get('/list', isLoggedIn, function (req, res) {
+    Promise.all([
+      userControl.loadAllUsers(),
+      projectControl.loadAllProjects(),
+      taskControl.loadTasksCount(req.user.id)
+    ])
+      .then(([result1, result2, result3]) => {
+        console.log(result2)
+        console.log(result3)
+        res.render('index', {
+          user: req.user, // get the user out of session and pass to template
+          allUsers: result1,
+          allProjects: result2,
+          myTaskCount: result3
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   })
 
   app.get('/logout', function (req, res) {

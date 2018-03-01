@@ -15,13 +15,13 @@ module.exports = {
     })
   },
 
-  loadTasksCount: function(id) {
+  loadTasksCount: function (id) {
     return new Promise((resolve, reject) => {
       tasks.count({
         where: {
           'issued': id,
           status: {
-            [Op.ne]: "completed"
+            [Op.ne]: 'completed'
           }
         }
       }).then(data => {
@@ -35,9 +35,9 @@ module.exports = {
   getInbox: function (req, res) {
     tasks.findAndCountAll({
       where: {
-        issued: req.body.id,
+        issued: req.params.id,
         status: {
-          [Op.ne]: "completed"
+          [Op.ne]: 'completed'
         }
       },
       order: [['created_date', 'DESC']]
@@ -58,13 +58,13 @@ module.exports = {
     tasks.findAndCountAll({
       where: {
         UserId: req.params.userId || {
-          [Op.ne]: null
+            [Op.ne]: null
         },
         status: req.params.status || {
-          [Op.ne]: null
+            [Op.ne]: null
         },
         project: req.params.projectId || {
-          [Op.ne]: null
+            [Op.ne]: null
         }
       },
       offset: (req.params.page - 1) * 10,
@@ -108,10 +108,10 @@ module.exports = {
     })
   },
 
-  getCountByProject: function(req, res) {
+  getCountByProject: function (req, res) {
     tasks.findAll({
       group: ['project'],
-      attributes: [['project', 'name'], [sequelize.fn('COUNT', 'project'), 'value']],
+      attributes: [['project', 'name'], [sequelize.fn('COUNT', 'project'), 'value']]
     }).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
@@ -123,10 +123,10 @@ module.exports = {
     })
   },
 
-  getCountByStatus: function(req, res) {
+  getCountByStatus: function (req, res) {
     tasks.findAll({
       group: ['status'],
-      attributes: [['status', 'name'], [sequelize.fn('COUNT', 'status'), 'value']],
+      attributes: [['status', 'name'], [sequelize.fn('COUNT', 'status'), 'value']]
     }).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
@@ -138,23 +138,27 @@ module.exports = {
     })
   },
 
-  getCountByCreator: function(req, res) {
+  getCountByCreator: function (req, res) {
     tasks.findAll({
+      raw: true,
       group: ['created_by'],
-      attributes: [['created_by', 'name'], [sequelize.fn('COUNT', 'created_by'), 'value']],
+      attributes: [['created_by', 'name'], [sequelize.fn('COUNT', 'created_by'), 'value']]
     }).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
       } else {
-        res.status(200).json(data)
+        var name = data.map(x => x.name)
+        var value = data.map(x => x.value)
+        res.status(200).json([name, value])
       }
     }).catch(error => {
       console.log(error)
     })
   },
 
-  getTop5DueTasks: function(req, res) {
+  getTop5DueTasks: function (req, res) {
     tasks.findAll({
+      raw: true,
       where: {
         due_date: {
           [Op.gt]: new Date()
@@ -162,16 +166,17 @@ module.exports = {
       },
       limit: 5,
       order: [['due_date', 'ASC']],
-      attributes: [['task_description', 'name'], ['due_date', 'value']],
+      attributes: [['task_description', 'name'], ['due_date', 'value']]
     }).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
       } else {
-        res.status(200).json(data)
+        var name = data.map(x => x.name)
+        var value = data.map(x => x.value)
+        res.status(200).json([name, value])
       }
     }).catch(error => {
       console.log(error)
     })
-  },
-
+  }
 }
