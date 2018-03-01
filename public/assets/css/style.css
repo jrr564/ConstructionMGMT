@@ -5,6 +5,7 @@ body {
 
 .navbar-top, .modal-header {
     background-color: #8c4a0e;
+    font-weight: 900;
 
 }
 
@@ -13,8 +14,17 @@ body {
     color: white;
     font-size: 50px;
 }
-a {
+a, {
     font-size: 16px;
+}
+#navbar-user-name{
+    margin-right:2px;
+}
+.navbar-text{
+    font-size: 18px;
+    color: #5a2000;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 .header-link {
     color: white;
