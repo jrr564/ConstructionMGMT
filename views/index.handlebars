@@ -9,7 +9,8 @@
             </li>
             <li class="nav-item">
                 <a class="header-link nav-link" href="#">
-                    <i class="fa fa-inbox" aria-hidden="true"></i> INBOX <span class="badge badge-light">{{myTaskCount}}</span>
+                    <i class="fa fa-inbox" aria-hidden="true"></i> INBOX
+                    <span class="badge badge-light">{{myTaskCount}}</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -60,12 +61,12 @@
                                 </div>
                             </form>
                         </li>
-        
+
                     </div>
                 </div>
             </ul>
         </div>
-        
+
         <div class="row" style="height: 200px">
             <div class="col-sm col-12" style="height: 200px">
                 <div id="graph1" style="height: 100%"></div>
@@ -84,10 +85,160 @@
         </div>
 
     </div>
-     
+
 </div>
 
+<div id="newIssueModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ADD NEW ISSUE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group modal-form">
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="true">
+                                    Project
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Bank Tower</a>
+                                    <a class="dropdown-item" href="#">Longhorn Arena</a>
+                                </div>
+                            </div>
+                            <div class="">
+                                <label for="description-label">Add New Project</label>
+                                <input type="text">
+                            </div>
+                        </div>
 
+                        <div class="col-md-4">
+                            <label for="description-label">Description</label>
+                            <textarea type="text"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">
+                                    Status
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Open</a>
+                                    <a class="dropdown-item" href="#">Closed</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">
+                                    Assigned To
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Chen</a>
+                                    <a class="dropdown-item" href="#">Jon</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="due-date-input" class="col-form-label">Due</label>
+                            <div class="col-10">
+                                <input class="form-control" type="date" value="2011-08-19" id="due-date-input">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Add an Attachment</label>
+                                    <input type="file" class="form-control-file" id="formControlFile1">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning">Add Issue</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- "edit issue" modal -->
+<div id="editModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">EDIT ISSUE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group modal-form">
+                        <div class="col-md-4">
+                            <label for="description-label">Description</label>
+                            <textarea rows="5" type="text"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">
+                                    Status
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Open</a>
+                                    <a class="dropdown-item" href="#">Closed</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">
+                                    Assigned To
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Chen</a>
+                                    <a class="dropdown-item" href="#">Jon</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="due-date-input" class="col-form-label">Due</label>
+                            <div class="col-10">
+                                <input class="form-control" type="date" value="2011-08-19" id="due-date-input">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Add an Attachment</label>
+                                    <input type="file" class="form-control-file" id="formControlFile1">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 
@@ -220,8 +371,8 @@
             },
             tooltip: {
                 trigger: 'axis',
-                axisPointer: {            
-                    type: 'line'        
+                axisPointer: {
+                    type: 'line'
                 }
             },
             grid: {
