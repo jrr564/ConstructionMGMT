@@ -28,8 +28,8 @@ router.route('/api/dashboard/getCountByStatus')
 router.route('/api/dashboard/getCountByCreator')
   .get(taskControl.getCountByCreator)
 
-router.route('/api/dashboard/getTop5DueTasks')
-  .get(taskControl.getTop5DueTasks)
+router.route('/api/dashboard/getCountByDue')
+  .get(taskControl.getCountByDue)
 
 // API routes for projects
 router.route('/api/projects')

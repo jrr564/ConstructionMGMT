@@ -1,58 +1,260 @@
-<div class="container">
-    <h2>Dashboard</h2>
-    <h5>Hello <strong id="username" style="color: red">{{ user.username }}</strong>!</h5>
-    <h5>you are logged in.</h5>
-    <h5><a href="/logout">logout</a></h5>
+<nav class="navbar navbar-default navbar-top navbar-fixed-top navbar-expand-lg">
+    <div class="navbar-collapse" id="navbarSupportedContent">
+        <a id="logo-text" class="navbar-brand disabled" href="#">
+            <img id="logo" src="/assets/img/construction-hat.png" width="80" height="80" class="d-inline-block align-top" alt="CONSTRUCTION HAT LOGO"> CONSTRUCTION MGMT
+        </a>
+        <ul class="navbar-nav ml-auto top-link">
+            <li class="nav-item">
+                <span id="navbar-user-name" class="navbar-text" id="username" key={{user.id}}>{{user.username}}</span>
+            </li>
+            <li class="nav-item">
+                <a class="header-link nav-link" href="#">
+                    <i class="fa fa-inbox" aria-hidden="true"></i> INBOX <span class="badge badge-light">{{myTaskCount}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="header-link nav-link" href="/logout">LOG-OUT</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container py-4">
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav navbar-light">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title text-center">NAVIGATION</h4>
+                        <li class="nav-item">
+                            <a class="header-link nav-link disabled" href="/">DASHBOARD</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="header-link nav-link disabled" data-toggle="modal" data-target="#newIssueModal" href="#">ADD NEW ISSUE
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+                        </li>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">
+                                ALL ISSUES
+                                <span class="caret"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Issue 1</a>
+                                <a class="dropdown-item" href="#">Issue 2</a>
+                                <a class="dropdown-item" href="#">Issue 3</a>
+                            </div>
+                        </div>
+                        <li class="nav-item">
+                            <a class="header-link nav-link disabled" href="#">FILTER</a>
+                            <form>
+                                <div class="filter-form form-group">
+                                    <label for="status-label">STATUS</label>
+                                    <input type="text">
+                                    <label for="ID-label">ID</label>
+                                    <input type="text">
+                                    <label for="Assigned-to-label">ASSIGNED TO</label>
+                                    <input type="text">
+                                    <button type="submit" class="btn btn-warning">SUBMIT</button>
+                                </div>
+                            </form>
+                        </li>
+        
+                    </div>
+                </div>
+            </ul>
+        </div>
+        
+        <div class="row" style="height: 200px">
+            <div class="col-sm col-12" style="height: 200px">
+                <div id="graph1" style="height: 100%"></div>
+            </div>
+            <div class="col-sm col-12" style="height: 200px">
+                <div id="graph2" style="height: 100%"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm col-12" style="height: 200px">
+                <div id="graph3" style="height: 100%"></div>
+            </div>
+            <div class="col-sm col-12" style="height: 200px">
+                <div id="graph4" style="height: 100%"></div>
+            </div>
+        </div>
+
+    </div>
+     
 </div>
 
-<div id="graph1" style="height: 100%"></div>
-<div id="graph2" style="height: 100%"></div>
-<div id="graph3" style="height: 100%"></div>
-<div id="graph4" style="height: 100%"></div>
 
-
-<script>
-    var id = $("#username").text()
-    console.log(id)
-</script>
 
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 
 <script type="text/javascript">
     $.ajax({
-       url: "/api/dashboard/getCountByStatus"
-     }).done(function(result) {
-       var dom = document.getElementById("graph1");
-       var myChart = echarts.init(dom);
-       var app = {};
-       var option = {
-           title : {
-               text: 'Task Counts Per Status',
-               x:'center'
-           },
-           tooltip : {
+        url: "/api/dashboard/getCountByProject"
+    }).done(function (result) {
+        var dom = document.getElementById("graph1");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option = {
+            title: {
+                text: 'Task Counts Per Project',
+                x: 'center'
+            },
+            tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
-           },
-           series : [
-               {
-                   name: 'Status',
-                   type: 'pie',
-                   radius : '55%',
-                   center: ['50%', '60%'],
-                   data: result,
-                   itemStyle: {
-                       emphasis: {
-                           shadowBlur: 10,
-                           shadowOffsetX: 0,
-                           shadowColor: 'rgba(0, 0, 0, 0.5)'
-                       }
-                   }
-               }
-           ]
-       };
-       if (option && typeof option === "object") {
-           myChart.setOption(option, true);
-       }
-     })
+            },
+            series: [
+                {
+                    name: 'Status',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: result,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    });
+    $.ajax({
+        url: "/api/dashboard/getCountByStatus"
+    }).done(function (result) {
+        var dom = document.getElementById("graph2");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option = {
+            title: {
+                text: 'Task Counts Per Status',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            series: [
+                {
+                    name: 'Status',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: result,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    });
+    $.ajax({
+        url: "/api/dashboard/getCountByCreator"
+    }).done(function (result) {
+        var dom = document.getElementById("graph3");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option = {
+            title: {
+                text: 'Task Count Per Creator',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                type: 'category',
+                data: result[0]
+            },
+            series:
+                {
+                    name: 'Task Count',
+                    type: 'bar',
+                    data: result[1]
+                }
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    });
+    $.ajax({
+        url: "/api/dashboard/getCountByDue"
+    }).done(function (result) {
+        var dom = document.getElementById("graph4");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option = {
+            color: ['#3398DB'],
+            title: {
+                text: 'Tasks Count By Due Date',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            
+                    type: 'line'        
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: result[0],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: 'Task Count',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: result[1]
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    });
 </script>
