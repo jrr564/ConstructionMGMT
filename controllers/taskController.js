@@ -57,17 +57,17 @@ module.exports = {
   filterTasks: function (req, res) {
     tasks.findAndCountAll({
       where: {
-        AssignedTo_Id: req.params.userId || {
+        AssignedTo_Id: req.query.userId || {
             [Op.ne]: null
         },
-        status: req.params.status || {
+        status: req.query.status || {
             [Op.ne]: null
         },
-        projectId: req.params.projectId || {
+        projectId: req.query.projectId || {
             [Op.ne]: null
         }
       },
-      offset: (req.params.page - 1) * 10,
+      offset: (req.query.page - 1) * 10,
       limit: 10,
       order: [['createdAt', 'DESC']]
     }).then(data => {
@@ -167,7 +167,7 @@ module.exports = {
       limit: 5,
       order: [['due_date', 'ASC']],
       group: ['due_date'],
-      attributes: [['due_date', 'name'], [sequelize.fn('COUNT','due_date'), 'value']]
+      attributes: [['due_date', 'name'], [sequelize.fn('COUNT', 'due_date'), 'value']]
     }).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
