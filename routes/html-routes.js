@@ -59,9 +59,7 @@ module.exports = function (app, passport) {
       taskControl.loadTasksCount(req.user.id)
     ])
       .then(([result1, result2, result3]) => {
-        console.log(result2)
-        console.log(result3)
-        res.render('index', {
+        res.render('list', {
           user: req.user, // get the user out of session and pass to template
           allUsers: result1,
           allProjects: result2,

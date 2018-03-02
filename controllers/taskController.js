@@ -156,7 +156,7 @@ module.exports = {
     })
   },
 
-  getTop5DueTasks: function (req, res) {
+  getCountByDue: function (req, res) {
     tasks.findAll({
       raw: true,
       where: {
@@ -166,7 +166,8 @@ module.exports = {
       },
       limit: 5,
       order: [['due_date', 'ASC']],
-      attributes: [['task_description', 'name'], ['due_date', 'value']]
+      group: ['due_date'],
+      attributes: [['due_date', 'name'], [sequelize.fn('COUNT','due_date'), 'value']]
     }).then(data => {
       if (data.length === 0) {
         res.status(404).send('No data found')
