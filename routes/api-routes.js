@@ -11,7 +11,7 @@ router.route('/api/tasks')
   .put(taskControl.updateTask)
 
 // API routes for tasks get
-router.route('/api/tasks/users/:userId/projects/:projectId/status/:status/page/:page')
+router.route('/api/tasks/:userId?/:projectId?/:status?/:page?')
   .get(taskControl.filterTasks)
 
 // API for user inbox
