@@ -100,18 +100,18 @@
                                     {{#each allProjects}}
                                     <option value={{id}}>{{project_name}}</option>
                                     {{/each}}
-                                    <option value="new project">Add a new project</option>
+                                    <option value="newProject">Add a new project</option>
                                 </select>
                             </div>
                             <div class="">
                                 <label for="description-label">Add New Project</label>
-                                <input type="text">
+                                <input type="text" id="projectName">
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <label for="description-label">Description</label>
-                            <textarea type="text"></textarea>
+                            <textarea id="desc" type="text"></textarea>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -152,7 +152,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning">Add Issue</button>
+                <button type="button" id="addTask" class="btn btn-warning">Add Issue</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -231,6 +231,19 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 
 <script type="text/javascript">
+    $("#addTask").on("click", function () {
+            $.post("/api/tasks",
+                {
+                    ProjectId: $("#project").val(),
+                    task_description: $("#desc").val(),
+                    status: $("#status").val(),
+                    AssignedTo_Id: $("#assignTo").val(),
+                    due_date: $("#due-date-input").val(),
+                    createdBy_id: {{ user.id }}
+            }
+        );
+    });
+
     $.ajax({
         url: "/api/dashboard/getCountByProject"
     }).done(function (result) {
@@ -398,8 +411,6 @@
     });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
