@@ -37,16 +37,9 @@
                             </a>
                         </li>
                         <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="true">
-                                ALL ISSUES
-                                <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Issue 1</a>
-                                <a class="dropdown-item" href="#">Issue 2</a>
-                                <a class="dropdown-item" href="#">Issue 3</a>
-                            </div>
+                            <li class="nav-item">
+                                <a class="header-link nav-link disabled" href="/list">ALL ISSUES</a>
+                            </li>
                         </div>
                         <li class="nav-item">
                             <a class="header-link nav-link disabled" href="#">FILTER</a>
@@ -54,7 +47,7 @@
                                 <div class="filter-form form-group">
                                     <label for="status-label">STATUS</label>
                                     <input type="text">
-                                    <label for="ID-label">ID</label>
+                                    <label for="ID-label">PROJECT ID</label>
                                     <input type="text">
                                     <label for="Assigned-to-label">ASSIGNED TO</label>
                                     <input type="text">
@@ -142,51 +135,44 @@
                     <form>
                         <div class="form-group modal-form">
                             <div class="col-md-4">
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="true">
-                                        Project
-                                        <span class="caret"></span>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Bank Tower</a>
-                                        <a class="dropdown-item" href="#">Longhorn Arena</a>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Project</label>
+                                    <select class="form-control" id="project">
+                                        {{#each allProjects}}
+                                        <option value={{id}}>{{project_name}}</option>
+                                        {{/each}}
+                                        <option value="new project">Add a new project</option>
+                                    </select>
                                 </div>
                                 <div class="">
                                     <label for="description-label">Add New Project</label>
                                     <input type="text">
                                 </div>
                             </div>
-
+    
                             <div class="col-md-4">
                                 <label for="description-label">Description</label>
                                 <textarea type="text"></textarea>
                             </div>
                             <div class="col-md-4">
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true">
-                                        Status
-                                        <span class="caret"></span>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Open</a>
-                                        <a class="dropdown-item" href="#">Closed</a>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Status</label>
+                                    <select class="form-control" id="status">
+                                        <option value="Open">Open</option>
+                                        <option value="Closed">Closed</option>
+                                        <option value="Not Approved">Not Approved</option>
+                                        <option value="Ready to Inspect">Ready to Inspect</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true">
-                                        Assigned To
-                                        <span class="caret"></span>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Chen</a>
-                                        <a class="dropdown-item" href="#">Jon</a>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Assigned To</label>
+                                    <select class="form-control" id="assignTo">
+                                        {{#each allUsers}}
+                                        <option value={{id}}>{{username}}</option>
+                                        {{/each}}
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -238,8 +224,10 @@
                                         <span class="caret"></span>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Open</a>
-                                        <a class="dropdown-item" href="#">Closed</a>
+                                        <a class="dropdown-item" value="Open">Open</a>
+                                        <a class="dropdown-item" value="Closed">Closed</a>
+                                        <a class="dropdown-item" value="Not Approved">Not Approved</a>
+                                        <a class="dropdown-item" value="Ready to Inspect">Ready to Inspect</a>
                                     </div>
                                 </div>
                             </div>
@@ -290,9 +278,9 @@
 
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
