@@ -2,14 +2,14 @@
 
 Construction MGMT is a construction field management system that improves quality control, accelerates project delivery, safety and profitability for construction projects of all sizes.
 
-##Features
+## Features
 
 - Live Project Tracker
 - Communicate more effectively to reduce risk and uncertainty
 - Allows Construction Managers to extend access of critical information to the project team
 - Analyze and address root causes and drive positive behaviors
 
-##How it Works
+## How it Works
 
 - Set up a Project
 - Invite Project Members for collaboration
@@ -20,11 +20,11 @@ Construction MGMT is a construction field management system that improves qualit
 - Run Reports
 - Send information about issues to subcontractors, field personnel, and other stakeholders so that they can take quick action.
 
-##Built with
+## Built with
 -HTML, CSS, Bootstrap, Node, MySQL, Sequelize, Passport, Express, Handlebars, Body-Parser, Method-Override, Cookie-Parser, Connect-Flash,
 
 
-##Contributors:
+## Contributors:
 
 - Chen Li - @lichen777
 - Diego Martinez - @daygo27
