@@ -73,12 +73,17 @@ label {
 #page-content-wrapper {
     width: 100%;
     margin-top: 20px;
+    margin-left: 35px;
 }
 
 .content-block {
       margin: 20px;
       margin-left: 10px;
       width: 100%;
+}
+
+.card{
+    margin-bottom: 10px;
 }
 
 .sidebar-nav {
