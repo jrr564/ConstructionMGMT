@@ -21,7 +21,7 @@ Construction MGMT is a construction field management system that improves qualit
 - Send information about issues to subcontractors, field personnel, and other stakeholders so that they can take quick action.
 
 ## Built with
-- HTML, CSS, Bootstrap, Node, MySQL, Sequelize, Passport, Express, Handlebars, Body-Parser, Method-Override, Cookie-Parser, Connect-Flash,
+- HTML, CSS, Bootstrap, Node, MySQL, Sequelize, Passport, Express, Handlebars, Body-Parser, Method-Override, Cookie-Parser, Connect-Flash
 
 
 ## Contributors:
