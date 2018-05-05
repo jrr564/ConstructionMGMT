@@ -59,23 +59,25 @@
                 </div>
             </ul>
         </div>
+        <div id= "page-content-wrapper">
+            <div class="charts row" style="height: 200px">
+                <div class="col-sm col-12" style="height: 200px">
+                    <div id="graph1" style="height: 100%"></div>
+                </div>
+                <div class="col-sm col-12" style="height: 200px">
+                    <div id="graph2" style="height: 100%"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm col-12" style="height: 200px">
+                    <div id="graph3" style="height: 100%"></div>
+                </div>
+                <div class="col-sm col-12" style="height: 200px">
+                    <div id="graph4" style="height: 100%"></div>
+                </div>
+            </div>
+        </div>
 
-        <div class="row" style="height: 200px">
-            <div class="col-sm col-12" style="height: 200px">
-                <div id="graph1" style="height: 100%"></div>
-            </div>
-            <div class="col-sm col-12" style="height: 200px">
-                <div id="graph2" style="height: 100%"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm col-12" style="height: 200px">
-                <div id="graph3" style="height: 100%"></div>
-            </div>
-            <div class="col-sm col-12" style="height: 200px">
-                <div id="graph4" style="height: 100%"></div>
-            </div>
-        </div>
 
     </div>
 
@@ -232,16 +234,16 @@
 
 <script type="text/javascript">
     $("#addTask").on("click", function () {
-            $.post("/api/tasks",
-                {
-                    ProjectId: $("#project").val(),
-                    task_description: $("#desc").val(),
-                    status: $("#status").val(),
-                    AssignedTo_Id: $("#assignTo").val(),
-                    due_date: $("#due-date-input").val(),
-                    createdBy_id: {{ user.id }}
+        $.post("/api/tasks",
+            {
+                ProjectId: $("#project").val(),
+                task_description: $("#desc").val(),
+                status: $("#status").val(),
+                AssignedTo_Id: $("#assignTo").val(),
+                due_date: $("#due-date-input").val(),
+                createdBy_id: {{ user.id }}
             }
-        );
+    );
     });
 
     $.ajax({
